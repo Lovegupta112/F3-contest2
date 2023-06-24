@@ -29,6 +29,8 @@ signupBtn.addEventListener('click',(event)=>{
     let confirmPassword=inputs[3].value;
     alertDiv.innerHTML="";
     if(fullName && email && password && confirmPassword){
+ 
+        if(validateEmail(email)){
         if( password===confirmPassword){
         console.log('Successfully Signed Up!');
         alertMessage.innerText='Successfully Signed Up!';
@@ -48,6 +50,7 @@ signupBtn.addEventListener('click',(event)=>{
         alertMessage.className='error';
         alertDiv.append(alertMessage);
         }
+     }
     }
     else {
         console.log('Error : All the fields are mandatory');
@@ -56,6 +59,30 @@ signupBtn.addEventListener('click',(event)=>{
         alertDiv.append(alertMessage);
     }
 })
+
+// validating email ----
+
+function validateEmail(email){
+    console.log('validaton')
+    if(!email.includes('@') || email.indexOf('@')<1){
+        alertMessage.innerText='please enter email followed by @';
+        alertMessage.className='error';
+        alertDiv.innerHTML="";
+        alertDiv.append(alertMessage);
+      return false;
+    }
+    else if ((email.charAt(email.length-4)!=='.') && (email.charAt(email.length-3)!=='.')){
+        alertMessage.innerText="Please enter email followed by '.' like '.com' or '.in";
+        alertMessage.className='error';
+        alertDiv.innerHTML="";
+        alertDiv.append(alertMessage);
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
 
 //genrate token of  random 16 byte of string 
 
